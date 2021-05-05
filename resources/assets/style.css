@@ -1,0 +1,39 @@
+li span {
+    cursor: pointer;
+}
+/*
+ *  scroll
+ */
+#scroll-1::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 1px lightseagreen;
+    border-radius: 10px;
+    background-color: lightseagreen;
+}
+
+#scroll-1::-webkit-scrollbar
+{
+    width: 1px;
+    background-color: lightseagreen;
+}
+
+#scroll-1::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 1px lightseagreen;
+    background-color: #555;
+}
+#tools ul{
+    list-style: none;
+    border: 1px solid lightseagreen;
+    padding: 0;
+    margin: 0;
+}
+#tools ul li{
+    border-right: 1px solid lightseagreen;
+    display: inline-block;
+    padding: 0px 5px;
+    margin-right: 1px;
+    font-size: 40px;
+    cursor: pointer;
+}
