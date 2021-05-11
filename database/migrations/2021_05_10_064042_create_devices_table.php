@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCanvasesTable extends Migration
+class CreateDevicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,21 @@ class CreateCanvasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('canvases', function (Blueprint $table) {
+        Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->nullable();
-            $table->longText('canvas')->nullable();
+            $table->unsignedInteger('canvas_id')->nullable();
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }
 
-    /**-
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('canvases');
+        Schema::dropIfExists('devices');
     }
 }
