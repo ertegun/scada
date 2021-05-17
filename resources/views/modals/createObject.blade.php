@@ -17,13 +17,6 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="device_code">Cihaz Kodu</label>
-                                <input list="devices" type="text" id="device_code" class="form-control" onkeyup="searchDevices();" autocomplete="off">
-                                <datalist id="devices"></datalist>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
                                 <label for="type">Tip</label>
                                 <select name="type" id="type" class="form-control" required>
                                     <option disabled selected>Tip Seçin</option>
@@ -33,6 +26,13 @@
                                     <option value="type4">Type 4</option>
                                     <option value="type5">Type 5</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="device_code">Cihaz Kodu</label>
+                                <input list="devices" type="text" id="device_code" class="form-control" onkeyup="searchDevices();" autocomplete="off">
+                                <datalist id="devices"></datalist>
                             </div>
                         </div>
                     </div>
