@@ -1,4 +1,4 @@
-FROM phpdockerio/php72-fpm:latest
+FROM phpdockerio/php74-fpm:latest
 WORKDIR "/application"
 
 # Fix debconf warnings upon build
@@ -6,10 +6,5 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Install selected extensions and other stuff
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install  php7.2-mysql php7.2-xdebug php7.2-bcmath php7.2-bz2 php7.2-dba php7.2-enchant php7.2-gd php7.2-gmp php7.2-igbinary php7.2-imagick php7.2-interbase php7.2-intl php7.2-mongodb php7.2-msgpack php7.2-odbc php7.2-phpdbg php7.2-pspell php7.2-raphf php7.2-recode php7.2-soap php7.2-ssh2 php7.2-sybase php7.2-tideways php7.2-tidy php7.2-xmlrpc php7.2-xsl php7.2-xhprof php7.1-yaml \
-    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
-
-# Install git
-RUN apt-get update \
-    && apt-get -y install git \
+    && apt-get -y --no-install-recommends install  php7.4-mysql php7.4-xdebug php7.4-bcmath php7.4-bz2 php7.4-dba php7.4-enchant php7.4-gd php7.4-gmp php7.4-igbinary php7.4-imagick php7.4-interbase php7.4-intl php7.4-mongodb php7.4-msgpack php7.4-odbc php7.4-phpdbg php7.4-pspell php7.4-raphf php7.4-ssh2 php7.4-sybase php7.4-tideways php7.4-tidy php7.4-xmlrpc php7.4-xsl php7.4-xhprof php7.4-yaml \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
