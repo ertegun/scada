@@ -69,9 +69,9 @@ function addChildLine(options) {
         }
     }
     let line = new fabric.Line([fromX, fromY, toX, toY], {
-        fill: 'red',
-        stroke: 'red',
-        strokeWidth: 1,
+        fill: 'lightseagreen',
+        stroke: 'lightseagreen',
+        strokeWidth: 2,
         selectable: false,
         sourceObj: fromObject.id,
         targetObj: toObject.id,
@@ -148,7 +148,7 @@ fabric.Object.prototype.controls.deleteControl = new fabric.Control({
     offsetX: -16,
     cursorStyle: 'pointer',
     mouseUpHandler: deleteObject,
-    render: renderIcon(deleteImg),
+    render: renderIcon(deleteImg,'deleteControl'),
     cornerSize: 24
 });
 
@@ -159,7 +159,7 @@ fabric.Object.prototype.controls.info = new fabric.Control({
     offsetX: -16,
     cursorStyle: 'pointer',
     mouseUpHandler: showInfo,
-    render: renderIcon(infoImg),
+    render: renderIcon(infoImg,'info'),
     cornerSize: 24
 });
 fabric.Object.prototype.controls.drawLine = new fabric.Control({
@@ -169,6 +169,6 @@ fabric.Object.prototype.controls.drawLine = new fabric.Control({
     offsetX: 16,
     cursorStyle: 'pointer',
     mouseUpHandler: addChild,
-    render: renderIcon(lineImg),
+    render: renderIcon(lineImg,'drawLine'),
     cornerSize: 24
 });

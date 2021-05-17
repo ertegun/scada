@@ -1,12 +1,7 @@
-<div id="tools">
-    <ul>
-{{--        <li title="Circle" id="gaCreateCircle" data-bs-toggle="modal" data-bs-target="#gaCreateCircleModal"><i class="far fa-circle"></i></li>--}}
-{{--        <li title="Square" id="gaCreateSquare" data-bs-toggle="modal" data-bs-target="#gaCreateSquareModal"><i class="far fa-square"></i></li>--}}
-{{--        <li title="Line" id="gaCreateLine" data-bs-toggle="modal" data-bs-target="#gaCreateLineModal"><i class="fas fa-grip-lines"></i></li>--}}
-{{--        <li title="Image" id="gaCreateImage"><i class="fas fa-image"></i></li>--}}
+<div id="tools" style="z-index: 99;">
+    <div><button id="menuBtn" class="btn btn-outline-light"><i class="fas fa-bars"></i></button></div>
+    <ul class="d-none">
         <li title="Table" id="gaCreateDevice" data-bs-toggle="modal" data-bs-target="#gaCreateDeviceModal"><i class="fas fa-image"></i></li>
-{{--        <li title="Undo" id="gaUndo"><i class="fas fa-undo"></i></li>--}}
-{{--        <li title="Redo" id="gaRedo"><i class="fas fa-redo"></i></li>--}}
         <li title="Zoom Reset" id="gaZoomReset"><i class="fas fa-search"></i></li>
         <li title="Zoom In" id="gaZoomIn"><i class="fas fa-search-plus"></i></li>
         <li title="Zoom Out" id="gaZoomOut"><i class="fas fa-search-minus"></i></li>

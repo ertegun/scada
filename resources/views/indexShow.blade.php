@@ -5,8 +5,7 @@
         <div class="row">
             <div class="col-lg-12 px-0 position-relative" id="scroll-1" style="overflow: auto">
                 @includeIf('toolbar')
-                <div id="workzone" data-canvas="{{$canvasData->id}}" class="shadow"
-                     style="height: calc(100vh - 80px); width: 2500px;border: lightseagreen 1px solid">
+                <div id="workzone" data-canvas="{{$canvasData->id}}" class="shadow">
                     <canvas id="c"></canvas>
                 </div>
             </div>
@@ -295,6 +294,7 @@
                                                         voltage_l1,
                                                         voltage_l2,
                                                         voltage_l3,
+                                                        locationName:o.deviceInfo.locationName
                                                     },
                                                     warningRules: o.warningRules,
                                                     left: o.left,
@@ -405,6 +405,18 @@
                     $('#appendWarningValue').append(html);
                     break;
 
+            }
+        });
+        $('#menuBtn').on('click',function () {
+            let _this = $(this);
+            if(_this.hasClass('open')){
+                _this.html('<i class="fas fa-bars"></i>');
+                _this.removeClass('open');
+                $('#tools ul').addClass('d-none');
+            }else{
+                _this.html('<i class="fas fa-times"></i>');
+                _this.addClass('open');
+                $('#tools ul').removeClass('d-none');
             }
         })
     </script>

@@ -9,7 +9,7 @@
     @yield('css')
     <title>Diagram | Fabricjs</title>
 </head>
-<body>
+<body style="background: #2b2b2b;">
     @yield('content')
     <script>const deviceInfoRedirectUrl = '{{env('DEVICE_INFO_REDIRECT_URL')}}'</script>
     <script src="{{asset('assets/all.min.js')}}"></script>

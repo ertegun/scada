@@ -18,9 +18,9 @@ const mix = require('laravel-mix');
 
 mix.styles([
     'resources/assets/all.min.css',
-    'resources/assets/toastr.min.css',
     'resources/assets/bootstrap.min.css',
     'resources/assets/loading.css',
+    'resources/assets/toastr.min.css',
     'resources/assets/style.css',
 ], 'public/assets/all.min.css');
 

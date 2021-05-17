@@ -76,16 +76,16 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '</thead>' +
                             '<tbody>' +
                             '<tr>' +
-                            '<td>L1</td><td>'+current_l1+' A</td><td>'+voltage_l1+' V</td>' +
+                            '<td>L1</td><td'+setWarningRule(current_l1,warningRules.l1AMax,warningRules.l1AMin)+'>'+current_l1+' A</td><td'+setWarningRule(voltage_l1,warningRules.l1VMax,warningRules.l1VMin)+'>'+voltage_l1+' V</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>L2</td><td>'+current_l2+' A</td><td>'+voltage_l2+' V</td>' +
+                            '<td>L2</td><td'+setWarningRule(current_l2,warningRules.l2AMax,warningRules.l2AMin)+'>'+current_l2+' A</td><td'+setWarningRule(voltage_l2,warningRules.l2VMax,warningRules.l2VMin)+'>'+voltage_l2+' V</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>L3</td><td>'+current_l3+' A</td><td>'+voltage_l3+' V</td>' +
+                            '<td>L3</td><td'+setWarningRule(current_l3,warningRules.l3AMax,warningRules.l3AMin)+'>'+current_l3+' A</td><td'+setWarningRule(voltage_l3,warningRules.l3VMax,warningRules.l3VMin)+'>'+voltage_l3+' V</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>Toplam</td><td>'+totalCurrent+' A</td><td></td>' +
+                            '<td>Toplam</td><td'+setWarningRule(totalCurrent,warningRules.aTotalMax,warningRules.aTotalMin)+'>'+totalCurrent+' A</td><td></td>' +
                             '</tr>' +
                             '</tbody>' +
                             '</table>' +
@@ -125,19 +125,19 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '</thead>' +
                             '<tbody>' +
                             '<tr>' +
-                            '<td>L1</td><td>'+current_l1+' A</td><td>'+voltage_l1+' V</td>' +
+                            '<td>L1</td><td'+setWarningRule(current_l1,warningRules.l1AMax,warningRules.l1AMin)+'>'+current_l1+' A</td><td'+setWarningRule(voltage_l1,warningRules.l1VMax,warningRules.l1VMin)+'>'+voltage_l1+' V</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>L2</td><td>'+current_l2+' A</td><td>'+voltage_l2+' V</td>' +
+                            '<td>L2</td><td'+setWarningRule(current_l2,warningRules.l2AMax,warningRules.l2AMin)+'>'+current_l2+' A</td><td'+setWarningRule(voltage_l2,warningRules.l2VMax,warningRules.l2VMin)+'>'+voltage_l2+' V</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>L3</td><td>'+current_l3+' A</td><td>'+voltage_l3+' V</td>' +
+                            '<td>L3</td><td'+setWarningRule(current_l3,warningRules.l3AMax,warningRules.l3AMin)+'>'+current_l3+' A</td><td'+setWarningRule(voltage_l3,warningRules.l3VMax,warningRules.l3VMin)+'>'+voltage_l3+' V</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>Toplam</td><td>'+totalCurrent+' A</td><td></td>' +
+                            '<td>Toplam</td><td'+setWarningRule(totalCurrent,warningRules.aTotalMax,warningRules.aTotalMin)+'>'+totalCurrent+' A</td><td></td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>Reaktif</td><td>% '+inductiveRatio+' End.</td><td>% '+capacitiveRatio+' Kap.</td>' +
+                            '<td>Reaktif</td><td'+setWarningRule(inductiveRatio,warningRules.inductiveMax,warningRules.inductiveMin)+'>% '+inductiveRatio+' End.</td><td'+setWarningRule(capacitiveRatio,warningRules.capacitiveMax,warningRules.capacitiveMin)+'>% '+capacitiveRatio+' Kap.</td>' +
                             '</tr>' +
                             '</tbody>' +
                             '</table>' +
@@ -167,16 +167,17 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '</thead>' +
                             '<tbody>' +
                             '<tr>' +
-                            '<td>L1</td><td>'+current_l1+' A</td>' +
+                            '<td>L1</td><td'+setWarningRule(current_l1,warningRules.l1AMax,warningRules.l1AMin)+'>'+current_l1+' A</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>L2</td><td>'+current_l2+' A</td>' +
+                            '<td>L2</td><td'+setWarningRule(current_l2,warningRules.l2AMax,warningRules.l2AMin)+'>'+current_l2+' A</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>L3</td><td>'+current_l3+' A</td>' +
+                            '<td>L3</td><td'+setWarningRule(current_l3,warningRules.l3AMax,warningRules.l3AMin)+'>'+current_l3+' A</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>Toplam</td><td>'+totalCurrent+' A</td>' +
+                            '<td>Toplam</td><td'+setWarningRule(totalCurrent,warningRules.aTotalMax,warningRules.aTotalMin)+'>'+totalCurrent+' A</td>' +
+                            '</tr>' +
                             '</tr>' +
                             '</tbody>' +
                             '</table>' +
@@ -204,13 +205,13 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '</thead>' +
                             '<tbody>' +
                             '<tr>' +
-                            '<td>L1</td><td>'+current_l1+' A</td>' +
+                            '<td>L1</td><td'+setWarningRule(current_l1,warningRules.l1AMax,warningRules.l1AMin)+'>'+current_l1+' A</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>L2</td><td>'+current_l2+' A</td>' +
+                            '<td>L2</td><td'+setWarningRule(current_l2,warningRules.l2AMax,warningRules.l2AMin)+'>'+current_l2+' A</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>L3</td><td>'+current_l3+' A</td>' +
+                            '<td>L3</td><td'+setWarningRule(current_l3,warningRules.l3AMax,warningRules.l3AMin)+'>'+current_l3+' A</td>' +
                             '</tr>' +
                             '</tbody>' +
                             '</table>' +
@@ -239,7 +240,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '<td>Enduktif</td><td>Kapasitif</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>% '+inductiveRatio+'</td><td>% '+capacitiveRatio+'</td>' +
+                            '<td'+setWarningRule(inductiveRatio,warningRules.inductiveMax,warningRules.inductiveMin)+'>% '+inductiveRatio+'</td><td'+setWarningRule(capacitiveRatio,warningRules.capacitiveMax,warningRules.capacitiveMin)+'>% '+capacitiveRatio+'</td>' +
                             '</tr>' +
                             '</tbody>' +
                             '</table>' +
@@ -272,8 +273,8 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             locationName
                         },
                         warningRules,
-                        left: 0,
-                        top: 0,
+                        left: 150,
+                        top: 150,
                         width: img.width,
                         height: img.height,
                     });
@@ -301,7 +302,6 @@ function setWarningRule(current,max,min) {
     return '';
 }
 function setLocationName(name) {
-    console.log(name)
     let letters = { "İ": "i", "ı": "i", "ö": "o", "Ö": "O", "ü": "u", "Ü": "U", "ç": "c", "Ç": "C", "ğ": "g", "Ğ": "G", "ş": "s", "Ş": "S"};
     name = name.replace(/(([ıİşŞğĞüÜçÇöÖ]))+/g, function(letter){ return letters[letter]; })
     if (name.length > 17){
