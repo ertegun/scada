@@ -11,8 +11,16 @@
 </head>
 <body>
     @yield('content')
-<script src="{{asset('assets/all.min.js')}}"></script>
+    <script>const deviceInfoRedirectUrl = '{{env('DEVICE_INFO_REDIRECT_URL')}}'</script>
+    <script src="{{asset('assets/all.min.js')}}"></script>
     <script>
+        $(()=>{
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
         toastr.options = {
             "closeButton": true,
             "newestOnTop": false,

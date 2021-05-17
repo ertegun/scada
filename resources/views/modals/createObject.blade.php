@@ -33,6 +33,7 @@
                                 <label for="device_code">Cihaz Kodu</label>
                                 <input list="devices" type="text" id="device_code" class="form-control" onkeyup="searchDevices();" autocomplete="off">
                                 <datalist id="devices"></datalist>
+                                <input type="hidden" name="locationName" id="locationName">
                             </div>
                         </div>
                     </div>
@@ -42,7 +43,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="closeCreateDevice" data-bs-dismiss="modal">Kapat</button>
-                <button type="button" class="btn btn-primary" id="createDevice">Oluştur</button>
+                <button type="button" class="btn btn-primary" id="createDevice" disabled>Oluştur</button>
             </div>
         </div>
     </div>

@@ -14,22 +14,24 @@ $('#createDevice').on('click', function () {
     let f = $('#fill').val() ?? 'white';
     let type = $('#type').val();
     let canvas_id = $('#workzone').data('canvas');
-    let code = document.getElementById('device_code').value;
+    let code = $('#device_code').val();
+    let locationName = $('#locationName').val();
     if (!canvas_id) return;
     if (!code) return;
     if (!type) return;
     //Ajax Request
-    setObjectWithAjax(canvas_id,code,f,type);
+    setObjectWithAjax(locationName,canvas_id,code,f,type);
     //Ajax Request End
 });
 
-function setObjectWithAjax(canvas_id,code,f,type) {
+function setObjectWithAjax(locationName,canvas_id,code,f,type) {
     $.ajax({
         url: "/dashboard/getDevice",
         type: "POST",
         data:{deviceId: code},
         success: function (res) {
             res = JSON.parse(res);
+            console.log(res)
             if (res.status) {
                 let svgData = '';
                 let instant_values = res.data.instant_values;
@@ -68,7 +70,10 @@ function setObjectWithAjax(canvas_id,code,f,type) {
                             '<foreignObject width="100%" height="100%">' +
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
-                            '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+code+')</td></tr></thead>' +
+                            '<thead>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
+                            '</thead>' +
                             '<tbody>' +
                             '<tr>' +
                             '<td>L1</td><td>'+current_l1+' A</td><td>'+voltage_l1+' V</td>' +
@@ -114,7 +119,10 @@ function setObjectWithAjax(canvas_id,code,f,type) {
                             '<foreignObject width="100%" height="100%">' +
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
-                            '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+code+')</td></tr></thead>' +
+                            '<thead>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
+                            '</thead>' +
                             '<tbody>' +
                             '<tr>' +
                             '<td>L1</td><td>'+current_l1+' A</td><td>'+voltage_l1+' V</td>' +
@@ -153,7 +161,10 @@ function setObjectWithAjax(canvas_id,code,f,type) {
                             '<foreignObject width="100%" height="100%">' +
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
-                            '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+code+')</td></tr></thead>' +
+                            '<thead>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
+                            '</thead>' +
                             '<tbody>' +
                             '<tr>' +
                             '<td>L1</td><td>'+current_l1+' A</td>' +
@@ -187,7 +198,10 @@ function setObjectWithAjax(canvas_id,code,f,type) {
                             '<foreignObject width="100%" height="100%">' +
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
-                            '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+code+')</td></tr></thead>' +
+                            '<thead>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
+                            '</thead>' +
                             '<tbody>' +
                             '<tr>' +
                             '<td>L1</td><td>'+current_l1+' A</td>' +
@@ -212,11 +226,14 @@ function setObjectWithAjax(canvas_id,code,f,type) {
                             capacitiveMin: $('#type5CMin').val(),
                             capacitiveMax: $('#type5CMax').val(),
                         };
-                        svgData = '<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">' +
+                        svgData = '<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150">' +
                             '<foreignObject width="100%" height="100%">' +
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
-                            '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+code+')</td></tr></thead>' +
+                            '<thead>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
+                            '</thead>' +
                             '<tbody>' +
                             '<tr>' +
                             '<td>Enduktif</td><td>Kapasitif</td>' +
@@ -251,7 +268,8 @@ function setObjectWithAjax(canvas_id,code,f,type) {
                             voltage_l2,
                             voltage_l3,
                             capacitiveRatio,
-                            inductiveRatio
+                            inductiveRatio,
+                            locationName
                         },
                         warningRules,
                         left: 0,
@@ -281,6 +299,14 @@ function setWarningRule(current,max,min) {
         }
     }
     return '';
+}
+function setLocationName(name) {
+    let letters = { "İ": "i", "ı": "i", "ö": "o", "Ö": "O", "ü": "u", "Ü": "U", "ç": "c", "Ç": "C", "ğ": "g", "Ğ": "G", "ş": "s", "Ş": "S"};
+    name = name.replace(/(([ıİşŞğĞüÜçÇöÖ]))+/g, function(letter){ return letters[letter]; })
+    if (name.length > 17){
+        return name.substring(0,17)+'...';
+    }
+    return name;
 }
 function warningAnimate(currentObj) {
     let obj = currentObj;

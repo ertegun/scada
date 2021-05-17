@@ -19,6 +19,10 @@ use App\Http\Controllers\DeviceController;
 //Route::post('/',[IndexController::class,'saveCanvasData'])->name('saveCanvasData');
 //Route::post('/getCanvasData',[IndexController::class,'getCanvasData'])->name('getCanvasData');
 
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
+
 Route::resource('dashboard',DefaultController::class);
 Route::post('/dashboard/addCanvasData',[DefaultController::class,'addCanvasData'])->name('addCanvasData');
 Route::post('/dashboard/searchDevices',[DefaultController::class,'searchDevices'])->name('searchDevices');

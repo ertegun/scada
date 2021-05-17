@@ -45,11 +45,6 @@
         })
 
         $(()=>{
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
             let canvasJson = '{!! $canvasData->canvas !!}';
             if(canvasJson){
                 let canvasData = JSON.parse(canvasJson);
@@ -76,6 +71,7 @@
                 beforeSend:function(){
                     devicesLoading = true;
                     $('#devices').empty();
+                    $('#createDevice').attr("disabled", true);
                 },
                 success: function (data) {
                     if (data.length > 0) {
@@ -83,6 +79,8 @@
                             if(index < 10){
                                 let opt = '<option value="'+el.measuring_device_id+'">'+el.measuring_location_name+'</option>';
                                 $('#devices').append(opt);
+                                $('#locationName').val(el.measuring_location_name);
+                                $('#createDevice').removeAttr("disabled");
                             }
                         });
                     }
@@ -110,7 +108,6 @@
                                 if(o.type == 'image'){
                                     res.forEach(function (device) {
                                         if(device.code === o.deviceInfo.deviceId){
-                                            console.log(o)
                                             let instant_values = device.instant_values;
                                             let current_l1 = instant_values.current_l1,
                                                 current_l2 = instant_values.current_l2,
@@ -136,7 +133,10 @@
                                                         '<foreignObject width="100%" height="100%">' +
                                                         '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+o.deviceInfo.fill+';color:#fff;width: 100%;height: 100%;">' +
                                                         '<table border="1" width="100%" height="100%">' +
-                                                        '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+o.deviceInfo.deviceId+')</td></tr></thead>' +
+                                                        '<thead>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+setLocationName(o.deviceInfo.locationName)+'</th></tr>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+o.deviceInfo.deviceId+'</th></tr>' +
+                                                        '</thead>' +
                                                         '<tbody>' +
                                                         '<tr>' +
                                                         '<td>L1</td><td'+setWarningRule(current_l1,o.warningRules.l1AMax,o.warningRules.l1AMin)+'>'+current_l1+' A</td><td'+setWarningRule(voltage_l1,o.warningRules.l1VMax,o.warningRules.l1VMin)+'>'+voltage_l1+' V</td>' +
@@ -162,7 +162,10 @@
                                                         '<foreignObject width="100%" height="100%">' +
                                                         '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+o.deviceInfo.fill+';color:#fff;width: 100%;height: 100%;">' +
                                                         '<table border="1" width="100%" height="100%">' +
-                                                        '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+o.deviceInfo.deviceId+')</td></tr></thead>' +
+                                                        '<thead>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+setLocationName(o.deviceInfo.locationName)+'</th></tr>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+o.deviceInfo.deviceId+'</th></tr>' +
+                                                        '</thead>' +
                                                         '<tbody>' +
                                                         '<tr>' +
                                                         '<td>L1</td><td'+setWarningRule(current_l1,o.warningRules.l1AMax,o.warningRules.l1AMin)+'>'+current_l1+' A</td><td'+setWarningRule(voltage_l1,o.warningRules.l1VMax,o.warningRules.l1VMin)+'>'+voltage_l1+' V</td>' +
@@ -192,7 +195,10 @@
                                                         '<foreignObject width="100%" height="100%">' +
                                                         '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+o.deviceInfo.fill+';color:#fff;width: 100%;height: 100%;">' +
                                                         '<table border="1" width="100%" height="100%">' +
-                                                        '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+o.deviceInfo.deviceId+')</td></tr></thead>' +
+                                                        '<thead>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+setLocationName(o.deviceInfo.locationName)+'</th></tr>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+o.deviceInfo.deviceId+'</th></tr>' +
+                                                        '</thead>' +
                                                         '<tbody>' +
                                                         '<tr>' +
                                                         '<td>L1</td><td'+setWarningRule(current_l1,o.warningRules.l1AMax,o.warningRules.l1AMin)+'>'+current_l1+' A</td>' +
@@ -219,7 +225,10 @@
                                                         '<foreignObject width="100%" height="100%">' +
                                                         '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+o.deviceInfo.fill+';color:#fff;width: 100%;height: 100%;">' +
                                                         '<table border="1" width="100%" height="100%">' +
-                                                        '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+o.deviceInfo.deviceId+')</td></tr></thead>' +
+                                                        '<thead>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+setLocationName(o.deviceInfo.locationName)+'</th></tr>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+o.deviceInfo.deviceId+'</th></tr>' +
+                                                        '</thead>' +
                                                         '<tbody>' +
                                                         '<tr>' +
                                                         '<td>L1</td><td'+setWarningRule(current_l1,o.warningRules.l1AMax,o.warningRules.l1AMin)+'>'+current_l1+' A</td>' +
@@ -243,7 +252,10 @@
                                                         '<foreignObject width="100%" height="100%">' +
                                                         '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+o.deviceInfo.fill+';color:#fff;width: 100%;height: 100%;">' +
                                                         '<table border="1" width="100%" height="100%">' +
-                                                        '<thead><tr><td style="text-align: center;" colspan="3">Konum ('+o.deviceInfo.deviceId+')</td></tr></thead>' +
+                                                        '<thead>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+setLocationName(o.deviceInfo.locationName)+'</th></tr>' +
+                                                        '<tr><th style="text-align: center;" colspan="3">'+o.deviceInfo.deviceId+'</th></tr>' +
+                                                        '</thead>' +
                                                         '<tbody>' +
                                                         '<tr>' +
                                                         '<td>Enduktif</td><td>Kapasitif</td>' +

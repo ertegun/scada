@@ -179,7 +179,9 @@ function showInfo() {
     // pasteSelectedArea();
     let selection = canvas.getActiveObject();
     if (selection.type !== 'activeSelection') {
-       console.log(selection.deviceInfo.id);
+        if(selection.hasOwnProperty('deviceInfo')){
+            window.open(deviceInfoRedirectUrl + selection.deviceInfo.deviceId, '_blank');
+        }
     }
 }
 
