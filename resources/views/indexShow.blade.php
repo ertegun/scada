@@ -25,7 +25,7 @@
             event.returnValue = `Are you sure you want to leave?`;
         });
         $('#gaSave').on('click', function () {
-            let json = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules']);
+            let json = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName']);
             json = JSON.stringify(json);
             localStorage.setItem('canvas',json);
 
@@ -157,8 +157,8 @@
                                                         '</svg>';
                                                     break;
                                                 case 'type2':
-
-                                                    svgData = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="175">' +
+                                                    console.log(o)
+                                                    svgData = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
                                                         '<foreignObject width="100%" height="100%">' +
                                                         '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+o.deviceInfo.fill+';color:#fff;width: 100%;height: 100%;">' +
                                                         '<table border="1" width="100%" height="100%">' +
