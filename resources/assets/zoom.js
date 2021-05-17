@@ -71,7 +71,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
                             '<thead>' +
-                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+setLocationName(locationName)+'</th></tr>' +
                             '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
                             '</thead>' +
                             '<tbody>' +
@@ -120,7 +120,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
                             '<thead>' +
-                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+setLocationName(locationName)+'</th></tr>' +
                             '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
                             '</thead>' +
                             '<tbody>' +
@@ -162,7 +162,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
                             '<thead>' +
-                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+setLocationName(locationName)+'</th></tr>' +
                             '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
                             '</thead>' +
                             '<tbody>' +
@@ -199,7 +199,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
                             '<thead>' +
-                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+setLocationName(locationName)+'</th></tr>' +
                             '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
                             '</thead>' +
                             '<tbody>' +
@@ -231,7 +231,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
                             '<table border="1" width="100%" height="100%">' +
                             '<thead>' +
-                            '<tr><th style="text-align: center;" colspan="3">'+locationName+'</th></tr>' +
+                            '<tr><th style="text-align: center;" colspan="3">'+setLocationName(locationName)+'</th></tr>' +
                             '<tr><th style="text-align: center;" colspan="3">'+code+'</th></tr>' +
                             '</thead>' +
                             '<tbody>' +
