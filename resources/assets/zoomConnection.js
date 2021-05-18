@@ -142,10 +142,10 @@ function addChildMoveLine(event) {
 
 
 fabric.Object.prototype.controls.deleteControl = new fabric.Control({
-    x: -0.5,
+    x: 0.5,
     y: 0.5,
     offsetY: 16,
-    offsetX: -16,
+    offsetX: 16,
     cursorStyle: 'pointer',
     mouseUpHandler: deleteObject,
     render: renderIcon(deleteImg,'deleteControl'),
@@ -158,7 +158,7 @@ fabric.Object.prototype.controls.info = new fabric.Control({
     offsetY: -16,
     offsetX: -16,
     cursorStyle: 'pointer',
-    mouseUpHandler: showInfo,
+    mouseUpHandler: goInfo,
     render: renderIcon(infoImg,'info'),
     cornerSize: 24
 });
@@ -170,5 +170,15 @@ fabric.Object.prototype.controls.drawLine = new fabric.Control({
     cursorStyle: 'pointer',
     mouseUpHandler: addChild,
     render: renderIcon(lineImg,'drawLine'),
+    cornerSize: 24
+});
+fabric.Object.prototype.controls.editControl = new fabric.Control({
+    x: -0.5,
+    y: 0.5,
+    offsetY: 16,
+    offsetX: -16,
+    cursorStyle: 'pointer',
+    mouseUpHandler: showInfo,
+    render: renderIcon(editImg,'editControl'),
     cornerSize: 24
 });

@@ -14,6 +14,7 @@
     </div>
 {{--    @includeIf('modals.createObject')--}}
     @includeIf('modals.createObject', ['devices' => $devices])
+    @includeIf('modals.editDevice')
 @endsection
 
 @section('css')
@@ -42,7 +43,7 @@
                 }
             });
         })
-
+        //document ready start
         $(()=>{
             let canvasJson = '{!! $canvasData->canvas !!}';
             if(canvasJson){
@@ -52,12 +53,21 @@
                     loadObjectsFromJson(canvasObjects).then(function () {
                         $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
                     });
+                    setInterval(function () {
+                        let objs = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName']);
+                        clearCanvas(canvas);
+                        loadObjectsFromJson(objs.objects).then(function () {
+                            $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
+                        });
+                    },60000);
+
                 }else{
                     $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
                 }
             }
             // $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
         });
+        //document ready end
         let devicesLoading = false;
         function searchDevices() {
             let val = $('#device_code').val();
@@ -95,7 +105,7 @@
                     canvas.renderOnAddRemove = false;
                     let itemsProcessed = 0;
                     const objCount = objects.filter(function (el) {
-                            return el.type == 'image'
+                        return el.type == 'image'
                     });
 
                     $.ajax({
@@ -156,7 +166,6 @@
                                                         '</svg>';
                                                     break;
                                                 case 'type2':
-                                                    console.log(o)
                                                     svgData = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
                                                         '<foreignObject width="100%" height="100%">' +
                                                         '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+o.deviceInfo.fill+';color:#fff;width: 100%;height: 100%;">' +
@@ -272,11 +281,11 @@
 
                                             // creating image from svg
                                             /**
-                                            const dataUri = `data:image/svg+xml;base64,${window.btoa(svgData)}`;
-                                            console.log(dataUri)
-                                            console.log(o.src)
-                                            o.src = dataUri;
-                                            canvas.add(o);
+                                             const dataUri = `data:image/svg+xml;base64,${window.btoa(svgData)}`;
+                                             console.log(dataUri)
+                                             console.log(o.src)
+                                             o.src = dataUri;
+                                             canvas.add(o);
                                              */
 
                                             const dataUri = `data:image/svg+xml;base64,${window.btoa(svgData)}`;
@@ -327,8 +336,7 @@
                 });
             })
         }
-    </script>
-    <script>
+
         $('#type').on('change',function () {
             let type = $(this).val();
             if(!type) return;
@@ -407,6 +415,7 @@
 
             }
         });
+
         $('#menuBtn').on('click',function () {
             let _this = $(this);
             if(_this.hasClass('open')){
@@ -419,5 +428,188 @@
                 $('#tools ul').removeClass('d-none');
             }
         })
+
+        function editDevice(obj) {
+            $('#gaEditDeviceModal').modal('show');
+            $('#editLocationName').val(obj.deviceInfo.locationName);
+            $('#editDeviceId').val(obj.deviceInfo.deviceId);
+            $('#editCardType').val(obj.deviceInfo.cardType);
+            $('#appendEditWarningInputs').empty();
+            $('#appendEditWarningInputs').append(warningInputs(obj));
+        }
+
+        $('#editDevice').on('click',function () {
+            let type = $('#editCardType').val();
+            let deviceId = $('#editDeviceId').val();
+            let warningRules = {};
+            switch (type) {
+                case 'type1':
+                    warningRules = {
+                        l1AMin: $('#type1AL1Min').val(),
+                        l1AMax: $('#type1AL1Max').val(),
+                        l2AMin: $('#type1AL2Min').val(),
+                        l2AMax: $('#type1AL2Max').val(),
+                        l3AMin: $('#type1AL3Min').val(),
+                        l3AMax: $('#type1AL3Max').val(),
+                        l1VMin: $('#type1VL1Min').val(),
+                        l1VMax: $('#type1VL1Max').val(),
+                        l2VMin: $('#type1VL2Min').val(),
+                        l2VMax: $('#type1VL2Max').val(),
+                        l3VMin: $('#type1VL3Min').val(),
+                        l3VMax: $('#type1VL3Max').val(),
+                        aTotalMin: $('#type1ATotalMin').val(),
+                        aTotalMax: $('#type1ATotalMax').val(),
+                    }
+                    break;
+                case 'type2':
+                    warningRules = {
+                        l1AMin: $('#type2AL1Min').val(),
+                        l1AMax: $('#type2AL1Max').val(),
+                        l2AMin: $('#type2AL2Min').val(),
+                        l2AMax: $('#type2AL2Max').val(),
+                        l3AMin: $('#type2AL3Min').val(),
+                        l3AMax: $('#type2AL3Max').val(),
+                        l1VMin: $('#type2VL1Min').val(),
+                        l1VMax: $('#type2VL1Max').val(),
+                        l2VMin: $('#type2VL2Min').val(),
+                        l2VMax: $('#type2VL2Max').val(),
+                        l3VMin: $('#type2VL3Min').val(),
+                        l3VMax: $('#type2VL3Max').val(),
+                        inductiveMin: $('#type2IMin').val(),
+                        inductiveMax: $('#type2IMax').val(),
+                        capacitiveMin: $('#type2CMin').val(),
+                        capacitiveMax: $('#type2CMax').val(),
+                        aTotalMin: $('#type2ATotalMin').val(),
+                        aTotalMax: $('#type2ATotalMax').val(),
+                    }
+
+                    break;
+                case 'type3':
+                    warningRules = {
+                        l1Min: $('#type2L1Min').val(),
+                        l1Max: $('#type2L1Max').val(),
+                        l2Min: $('#type2L2Min').val(),
+                        l2Max: $('#type2L2Max').val(),
+                        l3Min: $('#type2L3Min').val(),
+                        l3Max: $('#type2L3Max').val(),
+                        totalMin: $('#type2TotalMin').val(),
+                        totalMax: $('#type2TotalMax').val(),
+                    };
+                    break;
+                case 'type4':
+                    warningRules = {
+                        l1Min: $('#type2L1Min').val(),
+                        l1Max: $('#type2L1Max').val(),
+                        l2Min: $('#type2L2Min').val(),
+                        l2Max: $('#type2L2Max').val(),
+                        l3Min: $('#type2L3Min').val(),
+                        l3Max: $('#type2L3Max').val(),
+                    };
+                    break;
+                case 'type5':
+                    warningRules = {
+                        inductiveMin: $('#type5IMin').val(),
+                        inductiveMax: $('#type5IMax').val(),
+                        capacitiveMin: $('#type5CMin').val(),
+                        capacitiveMax: $('#type5CMax').val(),
+                    };
+                    break;
+                default:
+                    console.log('nothing')
+            }
+            let objs = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName']);
+            objs.objects.forEach(function (item) {
+                if(item.hasOwnProperty('deviceInfo')){
+                    if(item.deviceInfo.deviceId == deviceId && item.deviceInfo.cardType == type){
+                        item.warningRules = warningRules;
+                    }
+                }
+            });
+            $('#gaEditDeviceModal').modal('hide');
+            let json = JSON.stringify(objs);
+            localStorage.setItem('canvas',json);
+            $.ajax({
+                url: "{{route('addCanvasData')}}",
+                type: "POST",
+                data: {canvas: json, id: '{{$canvasData->id}}'},
+                success: function (data) {
+                    if (data) {
+                        toastr.success("Kayıt başarılı.");
+                    }
+                    else {
+                        toastr.error("Kayıt başarısız!");
+                    }
+                }
+            });
+        });
+
+        function warningInputs(obj) {
+            let html = '';
+            switch(obj.deviceInfo.cardType){
+                case 'type1':
+                    html = '<div class="col-6"><div class="form-group"><label for="type1AL1Min">L1 A Min</label><input type="number" id="type1AL1Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l1AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1AL1Max">L1 A Max</label><input type="number" id="type1AL1Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l1AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1VL1Min">L1 V Min</label><input type="number" id="type1VL1Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l1VMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1VL1Max">L1 V Max</label><input type="number" id="type1VL1Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l1VMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1AL2Min">L2 A Min</label><input type="number" id="type1AL2Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l2AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1AL2Max">L2 A Max</label><input type="number" id="type1AL2Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l2AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1VL2Min">L2 V Min</label><input type="number" id="type1VL2Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l2VMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1VL2Max">L2 V Max</label><input type="number" id="type1VL2Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l2VMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1AL3Min">L3 A Min</label><input type="number" id="type1AL3Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l3AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1AL3Max">L3 A Max</label><input type="number" id="type1AL3Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l3AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1VL3Min">L3 V Min</label><input type="number" id="type1VL3Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l3VMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1VL3Max">L3 V Max</label><input type="number" id="type1VL3Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l3VMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1ATotalMin">Toplam A Min</label><input type="number" id="type1ATotalMin" class="form-control" step="1" min="0" value="'+obj.warningRules.aTotalMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type1ATotalMax">Toplam A Max</label><input type="number" id="type1ATotalMax" class="form-control" step="1" min="0" value="'+obj.warningRules.aTotalMax+'"></div></div>';
+                    break;
+                case 'type2':
+                    html = '<div class="col-6"><div class="form-group"><label for="type2AL1Min">L1 A Min</label><input type="number" id="type2AL1Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l1AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2AL1Max">L1 A Max</label><input type="number" id="type2AL1Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l1AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2VL1Min">L1 V Min</label><input type="number" id="type2VL1Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l1VMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2VL1Max">L1 V Max</label><input type="number" id="type2VL1Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l1VMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2AL2Min">L2 A Min</label><input type="number" id="type2AL2Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l2AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2AL2Max">L2 A Max</label><input type="number" id="type2AL2Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l2AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2VL2Min">L2 V Min</label><input type="number" id="type2VL2Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l2VMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2VL2Max">L2 V Max</label><input type="number" id="type2VL2Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l2VMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2AL3Min">L3 A Min</label><input type="number" id="type2AL3Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l3AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2AL3Max">L3 A Max</label><input type="number" id="type2AL3Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l3AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2VL3Min">L3 V Min</label><input type="number" id="type2VL3Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l3VMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2VL3Max">L3 V Max</label><input type="number" id="type2VL3Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l3VMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2ATotalMin">Toplam A Min</label><input type="number" id="type2ATotalMin" class="form-control" step="1" min="0" value="'+obj.warningRules.aTotalMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2ATotalMax">Toplam A Max</label><input type="number" id="type2ATotalMax" class="form-control" step="1" min="0" value="'+obj.warningRules.aTotalMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2IMin">Endüktif Min</label><input type="number" id="type2IMin" class="form-control" step="1" min="0" value="'+obj.warningRules.inductiveMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2IMax">Endüktif Max</label><input type="number" id="type2IMax" class="form-control" step="1" min="0" value="'+obj.warningRules.inductiveMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2CMin">Kapasitif Min</label><input type="number" id="type2CMin" class="form-control" step="1" min="0" value="'+obj.warningRules.capacitiveMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type2CMax">Kapasitif Max</label><input type="number" id="type2CMax" class="form-control" step="1" min="0" value="'+obj.warningRules.capacitiveMax+'"></div></div>';
+                    break;
+                case 'type3':
+                    html = '<div class="col-6"><div class="form-group"><label for="type3AL1Min">L1 A Min</label><input type="number" id="type3AL1Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l1AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type3AL1Max">L1 A Max</label><input type="number" id="type3AL1Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l1AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type3AL2Min">L2 A Min</label><input type="number" id="type3AL2Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l2AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type3AL2Max">L2 A Max</label><input type="number" id="type3AL2Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l2AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type3AL3Min">L3 A Min</label><input type="number" id="type3AL3Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l3AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type3AL3Max">L3 A Max</label><input type="number" id="type3AL3Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l3AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type3ATotalMin">Toplam A Min</label><input type="number" id="type3ATotalMin" class="form-control" step="1" min="0" value="'+obj.warningRules.aTotalMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type3ATotalMax">Toplam A Max</label><input type="number" id="type3ATotalMax" class="form-control" step="1" min="0" value="'+obj.warningRules.aTotalMax+'"></div></div>';
+                    break;
+                case 'type4':
+                    html = '<div class="col-6"><div class="form-group"><label for="type4AL1Min">L1 A Min</label><input type="number" id="type4AL1Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l1AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type4AL1Max">L1 A Max</label><input type="number" id="type4AL1Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l1AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type4AL2Min">L2 A Min</label><input type="number" id="type4AL2Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l2AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type4AL2Max">L2 A Max</label><input type="number" id="type4AL2Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l2AMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type4AL3Min">L3 A Min</label><input type="number" id="type4AL3Min" class="form-control" step="1" min="0" value="'+obj.warningRules.l3AMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type4AL3Max">L3 A Max</label><input type="number" id="type4AL3Max" class="form-control" step="1" min="0" value="'+obj.warningRules.l3AMax+'"></div></div>';
+                    break;
+                case 'type5':
+                    html = '<div class="col-6"><div class="form-group"><label for="type5IMin">Endüktif Min</label><input type="number" id="type5IMin" class="form-control" step="1" min="0" max="100" value="'+obj.warningRules.inductiveMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type5IMax">Endüktif Max</label><input type="number" id="type5IMax" class="form-control" step="1" min="0" max="100" value="'+obj.warningRules.inductiveMax+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type5CMin">Kapasitif Min</label><input type="number" id="type5CMin" class="form-control" step="1" min="0" max="100" value="'+obj.warningRules.capacitiveMin+'"></div></div>';
+                    html += '<div class="col-6"><div class="form-group"><label for="type5CMax">Kapasitif Max</label><input type="number" id="type5CMax" class="form-control" step="1" min="0" max="100" value="'+obj.warningRules.capacitiveMax+'"></div></div>';
+                    break;
+
+            }
+            return html;
+        }
+
     </script>
 @endsection

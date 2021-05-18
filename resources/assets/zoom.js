@@ -24,6 +24,7 @@ $('#createDevice').on('click', function () {
     //Ajax Request End
 });
 
+
 function setObjectWithAjax(locationName,canvas_id,code,f,type) {
     $.ajax({
         url: "/dashboard/getDevice",
@@ -31,7 +32,6 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
         data:{deviceId: code},
         success: function (res) {
             res = JSON.parse(res);
-            console.log(res)
             if (res.status) {
                 let svgData = '';
                 let instant_values = res.data.instant_values;

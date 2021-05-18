@@ -3,7 +3,6 @@ function zoomWithWheel() {
         let delta = opt.e.deltaY;
         let zoom = canvas.getZoom();
         zoom *= 0.999 ** delta;
-        console.log(delta,zoom)
         if (zoom > 20) zoom = 20;
         if (zoom < 0.01) zoom = 0.01;
         canvas.setZoom(zoom);
@@ -100,13 +99,22 @@ function deleteObject() {
     }
 }
 
-function showInfo() {
+function goInfo() {
     // copySelectedArea();
     // pasteSelectedArea();
     let selection = canvas.getActiveObject();
     if (selection.type !== 'activeSelection') {
         if(selection.hasOwnProperty('deviceInfo')){
             window.open(deviceInfoRedirectUrl + selection.deviceInfo.deviceId, '_blank');
+        }
+    }
+}
+
+function showInfo() {
+    let selection = canvas.getActiveObject();
+    if (selection.type !== 'activeSelection') {
+        if(selection.hasOwnProperty('deviceInfo')){
+            editDevice(selection);
         }
     }
 }

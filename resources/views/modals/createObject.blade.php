@@ -43,7 +43,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="closeCreateDevice" data-bs-dismiss="modal">Kapat</button>
-                <button type="button" class="btn btn-primary" id="createDevice" disabled>Oluştur</button>
+                <button type="button" class="btn btn-success" id="createDevice" disabled>Oluştur</button>
             </div>
         </div>
     </div>
