@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
-                        <label>İsim</label>
+                        <label>Konum</label>
                         <input type="text" class="form-control" disabled value="" id="editLocationName">
                     </div>
                     <div class="col-12">

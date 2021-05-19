@@ -55,11 +55,11 @@
                     });
                     setInterval(function () {
                         let objs = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName']);
-                        clearCanvas(canvas);
+
                         loadObjectsFromJson(objs.objects).then(function () {
                             $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
                         });
-                    },60000);
+                    },10000);
 
                 }else{
                     $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
@@ -113,6 +113,7 @@
                         type: "POST",
                         data:{canvas_id: $('#workzone').data('canvas')},
                         success: function (res) {
+                            clearCanvas(canvas);
                             objects.forEach(function(o) {
                                 if(o.type == 'image'){
                                     res.forEach(function (device) {
@@ -535,6 +536,11 @@
                 success: function (data) {
                     if (data) {
                         toastr.success("Kayıt başarılı.");
+                        let newjson = JSON.parse(json);
+                        clearCanvas(canvas);
+                        loadObjectsFromJson(newjson.objects).then(function () {
+                            $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
+                        });
                     }
                     else {
                         toastr.error("Kayıt başarısız!");
