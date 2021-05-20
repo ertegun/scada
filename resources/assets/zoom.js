@@ -178,7 +178,6 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                             '<tr>' +
                             '<td>Toplam</td><td'+setWarningRule(totalCurrent,warningRules.aTotalMax,warningRules.aTotalMin)+'>'+totalCurrent+' A</td>' +
                             '</tr>' +
-                            '</tr>' +
                             '</tbody>' +
                             '</table>' +
                             '</div>' +
