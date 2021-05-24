@@ -35,6 +35,7 @@ mix.scripts([
     'resources/assets/zoomConfig.js',
     'resources/assets/zoomFunctions.js',
     'resources/assets/zoomConnection.js',
+    'resources/assets/icons.js',
     'resources/assets/zoom.js',
 ], 'public/assets/all.min.js');
 

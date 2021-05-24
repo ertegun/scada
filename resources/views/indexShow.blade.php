@@ -25,7 +25,7 @@
             event.returnValue = `Are you sure you want to leave?`;
         });
         $('#gaSave').on('click', function () {
-            let json = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName']);
+            let json = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName','icon']);
             json = JSON.stringify(json);
             localStorage.setItem('canvas',json);
 
@@ -45,7 +45,7 @@
         })
         //document ready start
         $(()=>{
-            let canvasJson = '{!! $canvasData->canvas !!}';
+            let canvasJson = `{!! $canvasData->canvas !!}`;
             if(canvasJson){
                 let canvasData = JSON.parse(canvasJson);
                 let canvasObjects = canvasData.objects;
@@ -53,21 +53,31 @@
                     loadObjectsFromJson(canvasObjects).then(function () {
                         $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
                     });
-                    setInterval(function () {
-                        let objs = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName']);
-
-                        loadObjectsFromJson(objs.objects).then(function () {
-                            $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
-                        });
-                    },10000);
-
                 }else{
                     $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
                 }
             }
-            // $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
         });
         //document ready end
+
+        //watch Mode
+        let watchModeInterval = null;
+        $('#watchMode').on('change',function(){
+            if($('#watchMode').is(':checked')) {
+                $('#watchModeText').text('İzleme Modu');
+                watchModeInterval = setInterval(function () {
+                    let objs = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName','icon']);
+                    loadObjectsFromJson(objs.objects).then(function () {
+                        $('.wrapper-spinner').addClass('d-none').removeClass('d-block');
+                    });
+                },10000);
+            } else {
+                $('#watchModeText').text('Düzenleme Modu');
+                clearInterval(watchModeInterval);
+            }
+        })
+        //watch mode end
+
         let devicesLoading = false;
         function searchDevices() {
             let val = $('#device_code').val();
@@ -105,8 +115,9 @@
                     canvas.renderOnAddRemove = false;
                     let itemsProcessed = 0;
                     const objCount = objects.filter(function (el) {
-                        return el.type == 'image'
+                        return el.hasOwnProperty('deviceInfo')
                     });
+                    let otherProcessed = objects.length - objCount.length;
 
                     $.ajax({
                         url: "/dashboard/getDevices",
@@ -115,7 +126,7 @@
                         success: function (res) {
                             clearCanvas(canvas);
                             objects.forEach(function(o) {
-                                if(o.type == 'image'){
+                                if(o.hasOwnProperty('deviceInfo')){
                                     res.forEach(function (device) {
                                         if(device.code === o.deviceInfo.deviceId){
                                             let instant_values = device.instant_values;
@@ -127,8 +138,6 @@
                                                 voltage_l3 = instant_values.voltage_l3,
                                                 capacitiveRatio = instant_values.capacitiveRatio,
                                                 inductiveRatio = instant_values.inductiveRatio;
-                                            // inductiveRatio !== '---' ? inductiveRatio = '%'+inductiveRatio : inductiveRatio = 'VY';
-                                            // capacitiveRatio !== '---' ? capacitiveRatio = '%'+capacitiveRatio : capacitiveRatio = 'VY';
                                             const totalCurrent = current_l1+current_l2+current_l3;
                                             o.deviceInfo.current_l1 = current_l1;
                                             o.deviceInfo.current_l2 = current_l2;
@@ -279,16 +288,6 @@
                                                         '</svg>';
                                                     break;
                                             }
-
-                                            // creating image from svg
-                                            /**
-                                             const dataUri = `data:image/svg+xml;base64,${window.btoa(svgData)}`;
-                                             console.log(dataUri)
-                                             console.log(o.src)
-                                             o.src = dataUri;
-                                             canvas.add(o);
-                                             */
-
                                             const dataUri = `data:image/svg+xml;base64,${window.btoa(svgData)}`;
                                             const img = new Image();
                                             img.onload = () => {
@@ -315,10 +314,8 @@
                                                 });
                                                 canvas.add(imgInstance);
                                                 canvas.renderAll();
-                                                // if(true) warningAnimate(imgInstance);
                                             };
                                             img.src = dataUri;
-                                            // if(o.deviceInfo.warningMax > 100) warningAnimate(o);
                                             itemsProcessed++;
                                             if(itemsProcessed === objCount.length) {
                                                 resolve("done")
@@ -327,11 +324,14 @@
                                     })
                                 }else{
                                     canvas.add(o);
+                                    otherProcessed--;
+                                    if(otherProcessed === 0){
+                                        resolve("done")
+                                    }
                                 }
                             });
                         }
                     })
-
                     canvas.renderOnAddRemove = origRenderOnAddRemove;
                     canvas.renderAll();
                 });
@@ -518,7 +518,7 @@
                 default:
                     console.log('nothing')
             }
-            let objs = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName']);
+            let objs = canvas.toJSON(['id', 'addChild', 'sourceObj', 'targetObj', 'lineId', 'deviceInfo','warningRules','locationName','icon']);
             objs.objects.forEach(function (item) {
                 if(item.hasOwnProperty('deviceInfo')){
                     if(item.deviceInfo.deviceId == deviceId && item.deviceInfo.cardType == type){

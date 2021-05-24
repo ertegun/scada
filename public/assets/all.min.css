@@ -131,9 +131,16 @@
 #tools button{
     box-shadow: none;
 }
-#tools div{
+#tools #btnArea{
     position: fixed;
     left: 15px;
+    top: 15px;
+    cursor: pointer;
+    z-index: 100;
+}
+#tools #modeArea{
+    position: fixed;
+    right: 15px;
     top: 15px;
     cursor: pointer;
     z-index: 100;

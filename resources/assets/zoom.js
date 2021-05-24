@@ -55,7 +55,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                         inductiveRatio = instant_values.inductiveRatio;
                     // inductiveRatio !== '---' ? inductiveRatio = '%'+inductiveRatio : inductiveRatio = 'VY';
                     // capacitiveRatio !== '---' ? capacitiveRatio = '%'+capacitiveRatio : capacitiveRatio = 'VY';
-    
+
                     const totalCurrent = current_l1+current_l2+current_l3;
                     let warningRules = {};
                     switch (type) {
@@ -124,7 +124,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                                 aTotalMin: $('#type2ATotalMin').val(),
                                 aTotalMax: $('#type2ATotalMax').val(),
                             }
-    
+
                             svgData = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
                                 '<foreignObject width="100%" height="100%">' +
                                 '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;background-color:'+f+';color:#fff;width: 100%;height: 100%;">' +
@@ -154,7 +154,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                                 '</div>' +
                                 '</foreignObject>' +
                                 '</svg>';
-    
+
                             break;
                         case 'type3':
                             warningRules = {
@@ -193,7 +193,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                                 '</div>' +
                                 '</foreignObject>' +
                                 '</svg>';
-    
+
                             break;
                         case 'type4':
                             warningRules = {
@@ -227,7 +227,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                                 '</div>' +
                                 '</foreignObject>' +
                                 '</svg>';
-    
+
                             break;
                         case 'type5':
                             warningRules = {
@@ -260,7 +260,7 @@ function setObjectWithAjax(locationName,canvas_id,code,f,type) {
                         default:
                             console.log('nothing')
                     }
-    
+
                     // creating image from svg
                     const dataUri = `data:image/svg+xml;base64,${window.btoa(svgData)}`;
                     const img = new Image();
@@ -319,8 +319,8 @@ function setWarningRule(current,max,min) {
 function setLocationName(name) {
     let letters = { "İ": "i", "ı": "i", "ö": "o", "Ö": "O", "ü": "u", "Ü": "U", "ç": "c", "Ç": "C", "ğ": "g", "Ğ": "G", "ş": "s", "Ş": "S"};
     name = name.replace(/(([ıİşŞğĞüÜçÇöÖ]))+/g, function(letter){ return letters[letter]; })
-    if (name.length > 17){
-        return name.substring(0,17)+'...';
+    if (name.length > 13){
+        return name.substring(0,13)+'...';
     }
     return name;
 }

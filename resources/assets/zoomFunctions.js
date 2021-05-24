@@ -121,7 +121,15 @@ function showInfo() {
 
 function renderIcon(icon,type) {
     return function renderIcon(ctx, left, top, styleOverride, fabricObject) {
-       if(fabricObject.type != 'line' || type == 'deleteControl'){
+       if(fabricObject.hasOwnProperty('deviceInfo') || type == 'deleteControl'){
+           let size = this.cornerSize;
+           ctx.save();
+           ctx.translate(left, top);
+           ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+           ctx.drawImage(icon, -size / 2, -size / 2, size, size);
+           ctx.restore();
+       }
+       if(fabricObject.hasOwnProperty('icon') && type == 'drawLine'){
            let size = this.cornerSize;
            ctx.save();
            ctx.translate(left, top);

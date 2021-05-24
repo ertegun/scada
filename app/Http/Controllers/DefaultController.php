@@ -126,7 +126,8 @@ class DefaultController extends Controller
         if($isSave){
             Device::whereCanvasId($request->id)->delete();
             foreach (json_decode($request->canvas)->objects as $obj){
-                if($obj->type === 'image'){
+                if(property_exists($obj,'deviceInfo')){
+//                if($obj->type === 'image'){
                     $hasDevice = Device::whereCanvasId($request->id)->whereCode($obj->deviceInfo->deviceId)->first();
                     if(!$hasDevice){
                         $deviceModel = new Device;
