@@ -17,7 +17,7 @@ const mix = require('laravel-mix');
 //     ]);
 
 mix.styles([
-    'resources/assets/all.min.css',
+    'resources/assets/fontawesome.min.css',
     'resources/assets/bootstrap.min.css',
     'resources/assets/loading.css',
     'resources/assets/toastr.min.css',
@@ -32,11 +32,11 @@ mix.scripts([
     'resources/assets/bootstrap.bundle.min.js',
     'resources/assets/jscolor.js',
     'resources/assets/fabric.min.js',
-    'resources/assets/zoomConfig.js',
-    'resources/assets/zoomFunctions.js',
-    'resources/assets/zoomConnection.js',
+    'resources/assets/config.js',
+    'resources/assets/functions.js',
+    'resources/assets/connection.js',
     'resources/assets/icons.js',
-    'resources/assets/zoom.js',
+    'resources/assets/main.js',
 ], 'public/assets/all.min.js');
 
 
