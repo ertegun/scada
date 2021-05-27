@@ -1,6 +1,6 @@
 {
-    "/assets/all.min.css": "/assets/all.min.css?id=97e5d468cd2b6ac1687c",
-    "/assets/all.min.js": "/assets/all.min.js?id=0dddfabb1c914ec1c156",
+    "/assets/all.min.css": "/assets/all.min.css?id=13e3a8c87f3a0fe637ef",
+    "/assets/all.min.js": "/assets/all.min.js?id=288c5810b5ee3dc503b2",
     "/assets/webfonts/fa-brands-400.eot": "/assets/webfonts/fa-brands-400.eot?id=2198e982852f4fb2c9ec",
     "/assets/webfonts/fa-brands-400.ttf": "/assets/webfonts/fa-brands-400.ttf?id=af19bb60dbc1c36da500",
     "/assets/webfonts/fa-brands-400.woff": "/assets/webfonts/fa-brands-400.woff?id=f99f2fe3d6150b64f348",
@@ -12,5 +12,8 @@
     "/assets/webfonts/fa-solid-900.eot": "/assets/webfonts/fa-solid-900.eot?id=1d95eb4e25a1dd38187b",
     "/assets/webfonts/fa-solid-900.ttf": "/assets/webfonts/fa-solid-900.ttf?id=8e84cd521b293cd70d06",
     "/assets/webfonts/fa-solid-900.woff": "/assets/webfonts/fa-solid-900.woff?id=e52cae62971fc2267c33",
-    "/assets/webfonts/fa-solid-900.woff2": "/assets/webfonts/fa-solid-900.woff2?id=94737a5e43c01cf87181"
+    "/assets/webfonts/fa-solid-900.woff2": "/assets/webfonts/fa-solid-900.woff2?id=94737a5e43c01cf87181",
+    "/assets/icons/capacitor.svg": "/assets/icons/capacitor.svg?id=5e2682e3ba09d7e0c3e1",
+    "/assets/icons/meter.svg": "/assets/icons/meter.svg?id=5808cfa608a25d9c67c3",
+    "/assets/icons/voltage.svg": "/assets/icons/voltage.svg?id=2cf7d8d81d5381f68416"
 }

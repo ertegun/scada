@@ -17,31 +17,32 @@ const mix = require('laravel-mix');
 //     ]);
 
 mix.styles([
-    'resources/assets/fontawesome.min.css',
-    'resources/assets/bootstrap.min.css',
-    'resources/assets/loading.css',
-    'resources/assets/toastr.min.css',
-    'resources/assets/style.css',
+    'resources/assets/css/fontawesome.min.css',
+    'resources/assets/css/bootstrap.min.css',
+    'resources/assets/css/loading.css',
+    'resources/assets/css/toastr.min.css',
+    'resources/assets/css/style.css',
 ], 'public/assets/all.min.css');
 
 
 mix.scripts([
-    'resources/assets/jquery.min.js',
-    'resources/assets/toastr.min.js',
-    'resources/assets/jspdf.min.js',
-    'resources/assets/bootstrap.bundle.min.js',
-    'resources/assets/jscolor.js',
-    'resources/assets/fabric.min.js',
-    'resources/assets/config.js',
-    'resources/assets/functions.js',
-    'resources/assets/connection.js',
-    'resources/assets/icons.js',
-    'resources/assets/main.js',
+    'resources/assets/js/jquery.min.js',
+    'resources/assets/js/toastr.min.js',
+    'resources/assets/js/jspdf.min.js',
+    'resources/assets/js/bootstrap.bundle.min.js',
+    'resources/assets/js/jscolor.js',
+    'resources/assets/js/fabric.min.js',
+    'resources/assets/js/config.js',
+    'resources/assets/js/functions.js',
+    'resources/assets/js/connection.js',
+    'resources/assets/js/icons.js',
+    'resources/assets/js/main.js',
 ], 'public/assets/all.min.js');
 
 
 
 mix.copyDirectory('resources/assets/webfonts', 'public/assets/webfonts');
+mix.copyDirectory('resources/assets/icons', 'public/assets/icons');
 
 
 mix.version();

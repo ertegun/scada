@@ -20,6 +20,12 @@
     -webkit-box-shadow: inset 0 0 1px lightseagreen;
     background-color: #555;
 }
+#workzone{
+    height: calc(100vh - 17px);
+    width: 2500px;
+    border: lightseagreen 1px solid;
+    z-index: 1;
+}
 #tools{
     z-index: 99;
 }
@@ -58,9 +64,9 @@
     cursor: pointer;
     color: #fff;
 }
-#workzone{
-    height: calc(100vh - 17px);
-    width: 2500px;
-    border: lightseagreen 1px solid;
-    z-index: 1;
+#tools #modeArea .form-check-input{
+    float: right;
+}
+#tools #modeArea .form-check-label{
+    margin-right: 2.5rem;
 }

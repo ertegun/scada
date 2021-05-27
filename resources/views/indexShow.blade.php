@@ -13,8 +13,9 @@
     @includeIf('loading')
     </div>
 {{--    @includeIf('modals.createObject')--}}
-    @includeIf('modals.createObject', ['devices' => $devices])
+    @includeIf('modals.createObject')
     @includeIf('modals.editDevice')
+    @includeIf('modals.createIcon')
 @endsection
 
 @section('css')
